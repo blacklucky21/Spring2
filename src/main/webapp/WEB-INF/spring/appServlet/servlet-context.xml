@@ -23,6 +23,29 @@
 	
 	<context:component-scan base-package="com.kh.ajax" />
 	
+	<beans:bean id="samp" class="com.kh.ajax.model.vo.Sample">
+	 		<!--1. 생성자를 통해서 초기화 : constructor-arg  -->
+	 		<!-- 1-1.필드 명을 이용한 초기화  -->
+	 		<!-- <beans:constructor-arg name="name" value="박시누"/>
+	 		<beans:constructor-arg name="age" value="10"/> -->
+	 		
+
+	 		<!-- 1-2.index를 이용한 초기화 -->
+	 		<!-- <beans:constructor-arg index="0" value="박신우"/>
+	 		<beans:constructor-arg index="1" value="22"/> -->
+	 		
+	 		<!--2. setter를 통해서 초기화: property  -->
+	 		
+	 		<beans:property name="name" value="RoseMary"/>
+	 		<beans:property name="age" value="40"/>
+	</beans:bean>
+	
+	<!--ajax에서 ModelAndView를 이용한 방식을 사용하기 위해 빈 등록  -->
+	<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/> <!--TestController 5번의 setViewName의 값이 들어간다  -->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0"/>
+	</beans:bean>
+	
 	
 	
 </beans:beans>

@@ -1,5 +1,6 @@
 package com.kh.ajax.model.vo;
 
+
 public class Sample {
 
 		private String name;
