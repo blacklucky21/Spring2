@@ -15,6 +15,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -165,5 +167,36 @@ public class TestController {
 		
 		
 	}
+	
+	//7. 반환 값으로 Responseentity<String>사용
+	//@ResponseBody와 비슷하나 header 값을 변경시킬 수 있고 Http상태코드도 함께 전송 가능
+	
+	/*
+	 * Spring에서는 HttpEntity라는 클래스 제공
+	 * 	HttpEntity : HTTP프로토콜을 이용하는 통신의 header와 body관련 정보 저장 가능
+	 * HttpEntity를 상속받는 클래스로 RequestEntity와 ResponseEntity가 있으며
+	 * 각각 Request, Response의 역활을 함 
+	 * 
+	 */
+	 
+	@RequestMapping("test7")
+	public ResponseEntity<String> test7Method(@RequestBody String param) throws ParseException {
+		JSONParser parser = new JSONParser(); //JSON으로 보내줘서 파서 필요
+		JSONArray jArr = (JSONArray)parser.parse(param);
+		
+		
+		for(int i=0; i< jArr.size();i++) {
+			JSONObject jobj = (JSONObject)jArr.get(i);
+			
+			String name = (String)jobj.get("name");
+			int age = ((Long)jobj.get("age")).intValue();
+			
+			System.out.println(i+"번째 객체 : "+name+", "+age);
+		}
+		
+		return new ResponseEntity<String>("success",HttpStatus.OK);
+		
+	}
+	
 
 }

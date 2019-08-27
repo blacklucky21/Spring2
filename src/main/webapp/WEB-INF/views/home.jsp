@@ -202,7 +202,35 @@
 			</script>
 		
 		</li>
-		
+		<li>
+			뷰에서 JSON배열 컨트롤러로 보내기
+			
+			<button id="test7">테스트</button>
+			<script>
+			$(function(){
+				$("#test7").on("click",function(){
+					var arr = [{name:"박신우",age:70},
+								{name : "김개똥",age:30}];
+					
+					$.ajax({
+						url:"test7",
+						data:JSON.stringify(arr),
+						type: "post",
+						contentType:"application/json; charset=utf-8",
+						success: function(data){
+							alert("서버로 전송성공"+data)
+							
+						},
+						error:function(request,status,errorData){
+							alert("error code:" +request.status+"\n"+"message : "+request.responseText+"\n"
+									+"error:"+errorData);
+						}
+					});
+				});
+			});
+			
+			</script>
+		</li>
 	</ol>
 </body>
 </html>
